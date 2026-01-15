@@ -188,10 +188,7 @@
         <h1>STAGE 1</h1>
         
         <div class="clue">
-            <p>I am the first, yet I am one.<br>
-            In binary dreams, my work is done.<br>
-            A question asked, an answer true—<br>
-            What am I?</p>
+            <p>MATHEMATICAL FINANCIER IS SHORT, TWICE HESITATING FAMILY TIES STARTING TO QUOTE OPPOSITE BLIND VIEWS? BIOLOGY'S CIPHER REVERSES AND ITS TUTOR. A SANS ORGAN FLIPPED RISES TO YOUR ACTIVITY. (8,7,3,4,5)</p>
         </div>
 
         <div class="input-group">
@@ -221,9 +218,6 @@
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        // Hash of the correct answer: "bit"
         const correctHash = 'd0013c2e0a387e4c6e6962c5f4b0c9481d60fbb9eb425ae5cda2f8ceb2c0064f';
         
         // Salt for reward generation
