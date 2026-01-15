@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>Stage 1</title>
     <style>
         * {
             margin: 0;
@@ -13,342 +13,260 @@
 
         body {
             min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 0, 150, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 255, 0, 0.2) 0%, transparent 50%),
-                linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             overflow: hidden;
             position: relative;
         }
 
-        body::before {
-            content: '';
+        .stars {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px),
-                repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
-            animation: drift 30s linear infinite;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        @keyframes drift {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                transform: translate(50px, 50px) rotate(360deg);
-            }
-        }
-
-        .orb {
+        .star {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            pointer-events: none;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .orb1 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            top: -200px;
-            left: -200px;
-            animation-delay: 0s;
-        }
-
-        .orb2 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            bottom: -150px;
-            right: -150px;
-            animation-delay: -7s;
-        }
-
-        .orb3 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(225deg, #a8e063, #56ab2f);
-            top: 50%;
-            right: -100px;
-            animation-delay: -14s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(100px, -50px) scale(1.1);
-            }
-            66% {
-                transform: translate(-50px, 100px) scale(0.9);
-            }
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 2px;
+            height: 2px;
             background: white;
             border-radius: 50%;
-            pointer-events: none;
-            animation: sparkle 3s ease-in-out infinite;
+            animation: twinkle 3s infinite;
         }
 
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .container {
             position: relative;
             z-index: 10;
-            padding: 2rem;
-        }
-
-        .image-frame {
-            position: relative;
-            padding: 30px;
-            background: 
-                linear-gradient(45deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)),
-                rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
-            border: 3px solid transparent;
-            background-clip: padding-box;
-            box-shadow: 
-                0 0 0 3px rgba(255, 255, 255, 0.3),
-                0 0 60px rgba(255, 255, 255, 0.2),
-                0 30px 90px rgba(0, 0, 0, 0.4),
-                inset 0 0 60px rgba(255, 255, 255, 0.1);
-            animation: frameGlow 4s ease-in-out infinite;
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 500px;
+            width: 90%;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        @keyframes frameGlow {
-            0%, 100% {
-                box-shadow: 
-                    0 0 0 3px rgba(255, 100, 255, 0.5),
-                    0 0 80px rgba(255, 100, 255, 0.3),
-                    0 30px 90px rgba(0, 0, 0, 0.4),
-                    inset 0 0 60px rgba(255, 255, 255, 0.1);
-            }
-            33% {
-                box-shadow: 
-                    0 0 0 3px rgba(100, 255, 255, 0.5),
-                    0 0 80px rgba(100, 255, 255, 0.3),
-                    0 30px 90px rgba(0, 0, 0, 0.4),
-                    inset 0 0 60px rgba(255, 255, 255, 0.1);
-            }
-            66% {
-                box-shadow: 
-                    0 0 0 3px rgba(255, 255, 100, 0.5),
-                    0 0 80px rgba(255, 255, 100, 0.3),
-                    0 30px 90px rgba(0, 0, 0, 0.4),
-                    inset 0 0 60px rgba(255, 255, 255, 0.1);
-            }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
         }
 
-        .image-wrapper {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 0 20px rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-            animation: fadeIn 1s ease-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(30px) rotate(-2deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0) rotate(0deg);
-            }
-        }
-
-        .image-wrapper:hover {
-            transform: scale(1.03) rotate(1deg);
-        }
-
-        .image-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-conic-gradient(
-                from 0deg,
-                transparent 0deg 30deg,
-                rgba(255, 255, 255, 0.1) 30deg 60deg
-            );
-            animation: rotate 20s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .image-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
-            background-size: 200% 200%;
-            animation: shimmer 3s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        @keyframes shimmer {
-            0%, 100% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-        }
-
-        img {
-            display: block;
-            max-width: min(90vw, 800px);
-            max-height: 80vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            position: relative;
-            z-index: 0;
-            filter: contrast(1.05) saturate(1.1);
-        }
-
-        .caption {
+        h1 {
+            color: white;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 30px;
             text-align: center;
-            margin-top: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 500;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .clue {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .clue:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .clue p {
+            color: white;
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.1em;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #fff;
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            text-shadow: 
-                0 0 10px rgba(255, 255, 255, 0.5),
-                0 2px 4px rgba(0, 0, 0, 0.5);
-            animation: captionFade 1.2s ease-out 0.3s backwards;
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
         }
 
-        @keyframes captionFade {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 87, 108, 0.5);
         }
 
-        .corner {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.6);
-            pointer-events: none;
-            z-index: 20;
+        button:active {
+            transform: translateY(-1px);
         }
 
-        .corner-tl {
-            top: -4px;
-            left: -4px;
-            border-right: none;
-            border-bottom: none;
-            border-radius: 40px 0 0 0;
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
         }
 
-        .corner-tr {
-            top: -4px;
-            right: -4px;
-            border-left: none;
-            border-bottom: none;
-            border-radius: 0 40px 0 0;
+        .result.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .corner-bl {
-            bottom: -4px;
-            left: -4px;
-            border-right: none;
-            border-top: none;
-            border-radius: 0 0 0 40px;
+        .result.success {
+            background: rgba(72, 187, 120, 0.9);
+            color: white;
         }
 
-        .corner-br {
-            bottom: -4px;
-            right: -4px;
-            border-left: none;
-            border-top: none;
-            border-radius: 0 0 40px 0;
+        .result.error {
+            background: rgba(245, 101, 101, 0.9);
+            color: white;
+        }
+
+        .reward {
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            font-size: 1em;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+    <div class="stars" id="stars"></div>
     
     <div class="container">
-        <div class="image-frame">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-            
-            <div class="image-wrapper">
-                <img src="assets/image.png" alt="Featured Image">
-            </div>
-            <div class="caption">A MOMENT CAPTURED IN TIME</div>
+        <h1>STAGE 1</h1>
+        
+        <div class="clue">
+            <p>I am the first, yet I am one.<br>
+            In binary dreams, my work is done.<br>
+            A question asked, an answer true—<br>
+            What am I?</p>
         </div>
+
+        <div class="input-group">
+            <input type="text" id="answer" placeholder="Enter your answer..." autocomplete="off">
+        </div>
+
+        <button onclick="checkAnswer()">Submit</button>
+
+        <div class="result" id="result"></div>
     </div>
 
     <script>
-        // Create sparkles
-        for (let i = 0; i < 50; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.animationDelay = Math.random() * 3 + 's';
-            sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
-            document.body.appendChild(sparkle);
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
         }
+
+        // SHA-256 implementation
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Hash of the correct answer: "bit"
+        const correctHash = 'd0013c2e0a387e4c6e6962c5f4b0c9481d60fbb9eb425ae5cda2f8ceb2c0064f';
+        
+        // Salt for reward generation
+        const salt = 'x9k2p7m4';
+
+        async function checkAnswer() {
+            const input = document.getElementById('answer').value.trim().toLowerCase();
+            const result = document.getElementById('result');
+            
+            if (!input) {
+                result.className = 'result error show';
+                result.innerHTML = 'Please enter an answer.';
+                return;
+            }
+
+            const hash = await sha256(input);
+
+            if (hash === correctHash) {
+                const rewardHash = await sha256(input + salt);
+                const reward = rewardHash.substring(0, 32).toUpperCase();
+                
+                result.className = 'result success show';
+                result.innerHTML = `
+                    <div>🎉 Correct! 🎉</div>
+                    <div class="reward">${reward}</div>
+                    <div style="margin-top: 15px; font-size: 0.9em;">Save this code for the next stage!</div>
+                `;
+            } else {
+                result.className = 'result error show';
+                result.innerHTML = '❌ Incorrect. Try again!';
+                
+                setTimeout(() => {
+                    result.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
     </script>
 </body>
 </html>
