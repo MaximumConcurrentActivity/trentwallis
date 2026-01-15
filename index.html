@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6...7?</title>
+    <title>Image Gallery</title>
     <style>
         * {
             margin: 0;
@@ -253,6 +253,30 @@
             filter: contrast(1.05) saturate(1.1);
         }
 
+        .caption {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: captionFade 1.2s ease-out 0.3s backwards;
+        }
+
+        @keyframes captionFade {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .corner {
             position: absolute;
             width: 60px;
@@ -310,6 +334,7 @@
             <div class="image-wrapper">
                 <img src="assets/image.png" alt="Featured Image">
             </div>
+            <div class="caption">A MOMENT CAPTURED IN TIME</div>
         </div>
     </div>
 
